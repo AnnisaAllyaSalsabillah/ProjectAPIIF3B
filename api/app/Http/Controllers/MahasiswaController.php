@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Prodi;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class ProdiController extends Controller
+class MahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $prodi = Prodi::with('fakultas')->get();
+        $mahasiswa = Mahasiswa::with('prodi')->get();
         $data['message'] = true;
-        $data['result'] = $prodi;
+        $data['result'] = $mahasiswa;
         return response()->json($data, Response::HTTP_OK);
     }
 
@@ -34,13 +33,13 @@ class ProdiController extends Controller
     {
         $validate = $request->validate([
             'nama' => 'required|unique:prodis',
-            'fakultas_id' => 'required'
+            'prodi_id' => 'required'
         ]);
 
-        $result = Prodi::create($validate); //simpan ke tabel fakultas
+        $result = Prodi::create($validate); 
         if($result){
             $data['success'] = true;
-            $data['message'] = "Data Prodi berhasil disimpan";
+            $data['message'] = "Data Mahasiswa berhasil disimpan";
             $data['result'] = $result;
             return response()->json($data, Response::HTTP_CREATED);
         }
@@ -49,7 +48,7 @@ class ProdiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Prodi $prodi)
+    public function show(Mahasiswa $mahasiswa)
     {
         //
     }
@@ -57,7 +56,7 @@ class ProdiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Prodi $prodi)
+    public function edit(Mahasiswa $mahasiswa)
     {
         //
     }
@@ -65,7 +64,7 @@ class ProdiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Prodi $prodi)
+    public function update(Request $request, Mahasiswa $mahasiswa)
     {
         //
     }
@@ -73,7 +72,7 @@ class ProdiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Prodi $prodi)
+    public function destroy(Mahasiswa $mahasiswa)
     {
         //
     }
