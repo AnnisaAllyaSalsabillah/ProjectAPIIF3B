@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('tempat_lahir', 50);
             $table->string('alamat', 50);
             $table->uuid('prodi_id');
-            $table->foreign('prodi_id')->references('id')->on('prodi');
+            $table->foreign('prodi_id')->references('id')->on('prodis');
             $table->timestamps();
         });
     }

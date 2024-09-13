@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MahasiswaController extends Controller
 {
@@ -32,11 +33,15 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'nama' => 'required|unique:prodis',
-            'prodi_id' => 'required'
+            'npm' => 'required|unique:mahasiswas',
+            'nama' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required',
+            'alamat' => 'required',
+            'prodi_id' => 'required|exists:prodis,id'
         ]);
 
-        $result = Prodi::create($validate); 
+        $result = Prodi::create($validate);
         if($result){
             $data['success'] = true;
             $data['message'] = "Data Mahasiswa berhasil disimpan";
